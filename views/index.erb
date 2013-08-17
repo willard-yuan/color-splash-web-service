@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Color Splash</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" media="all" href="/css/rdark.css">
+    <link rel="stylesheet" type="text/css" media="all" href="/css/main.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Allan:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Cardo:400,700' rel='stylesheet' type='text/css'>
+
+    <script src="/js/reqwest.min.js"></script>
+    <script src="/js/min/base.min.js?v=004"></script>
+  </head>
+  <body>
+    <div id="container">
+      <header id="site-header">
+        <h1>Color Splash</h1>
+      </header>
+
+      <section id="intro">
+        <p>
+          There are times when you need a code snippet in your page. You can use tons of available options
+          but I think that there is no better option than Pygments. The problem is that you have to have the Python
+          installed in order to use it. I find it kind of cumbersome, therefore I have created this online tool
+          for everyone to use. Enjoy!
+        </p>
+      </section>
+
+      <hr>
+
+      <div id="playground">
+        <form action="/pygmentize" method="POST" id="pygmentize-form">
+          <p><label for="lexer">Select a language</label></p>
+          <p>
+          <select name="lexer" id="lexer">
+
+          <% @lexer_options.each_pair do |value, text| %>
+            <option value="<%= value %>"><%= text %></option>
+          <% end %>
+
+          </select>
+          </p>
+          <p><label for="input-text">Enter your code</label></p>
+          <p><textarea id="input-text" name="input-text"></textarea></p>
+          <p><button type="button" onclick="pygmentizeCode(); return false;" id="submit">Pygmentize</button></p>
+        </form> <!--/pygmentize-form-->
+
+        <p class="label">Freshly baked HTML</p>
+        <div id="output-text">
+          <div style="text-align: center;">Your code will be available here.</div>
+        </div> <!--/output-text-container-->
+      </div> <!--/playground-->
+
+      <hr>
+
+      <footer>
+        <p>
+          Created in 2013 by <a href="http://dzerviniks.lv" title="Aigars Dzerviniks">Aigars Dzerviniks</a>.
+          No copyright, just use it!
+        </p>
+      </footer>
+    </div> <!--/container-->
+  </body>
+</html>
