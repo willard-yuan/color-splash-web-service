@@ -3,13 +3,8 @@ require 'pygments'
 require 'json'
 require "sinatra/reloader" if development?
 
-helpers do
-  def h(text)
-    Rack::Utils.escape_html text
-  end
-end
-
 get '/' do
+  # Available lexers
   @lexer_options = {
     ruby: 'Ruby',
     js: 'JavaScript',
@@ -31,6 +26,17 @@ get '/' do
   erb :index
 end
 
+# Converts a string of code into an HTML with an HTML code that produces a syntax
+# highlighted string of code that can be embedded in any HTML document.
+#
+# code - a String containing a code snippet
+# lexer - a programming language identifier
+#
+# Example
+#   POST /pygmentize { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
+#   # => { 'code': '...here goes the code that can be embedded in an HTML document...' }
+#
+# Returns JSON
 post '/pygmentize' do
   plain_code = params['code']
   lexer = params['lexer']
@@ -42,6 +48,18 @@ post '/pygmentize' do
   { code: output_code }.to_json
 end
 
+
+# Converts a string of code into an HTML with a syntax highlighted string of code that
+# can be embedded in any HTML document.
+#
+# code - a String containing a code snippet
+# lexer - a programming language identifier
+#
+# Example
+#   POST /pygmentize { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
+#   # => { 'code': '...here goes the code that can be embedded in an HTML document...' }
+#
+# Returns JSON
 post '/pygmentize/raw' do
   plain_code = params['code']
   lexer = params['lexer']
