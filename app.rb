@@ -68,3 +68,9 @@ post '/pygmentize/raw' do
   content_type :json
   { code: pygmented_code }.to_json
 end
+
+# Good old 404 page.
+not_found do
+  status 404
+  erb :not_found
+end
