@@ -23,7 +23,9 @@ get '/' do
     scss: 'SCSS'
   }
 
-  erb :index
+  @title = 'Color Splash'
+
+  erb :index, layout: :default
 end
 
 # Converts a string of code into an HTML with an HTML code that produces a syntax
@@ -71,6 +73,8 @@ end
 
 # Good old 404 page.
 not_found do
+  @title = '404 @ Color Splash'
+
   status 404
-  erb :not_found
+  erb :not_found, layout: :default
 end

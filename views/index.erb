@@ -1,78 +1,46 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Color Splash</title>
+<header id="site-header">
+  <h1>Color Splash</h1>
+</header>
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" type="text/css" media="all" href="/css/rdark.css">
-    <link rel="stylesheet" type="text/css" media="all" href="/css/main.css">
+<section id="intro">
+  <p>
+    There are times when you need a code snippet in your page. You can use tons of available options
+    but I think that there is no better option than Pygments. The problem is that you have to have the Python
+    installed in order to use it. I find it kind of cumbersome, therefore I have created this online tool
+    for everyone to use. Enjoy!
+  </p>
+</section>
 
-    <link href='http://fonts.googleapis.com/css?family=Allan:700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Cardo:400,700' rel='stylesheet' type='text/css'>
+<hr>
 
-    <script src="/js/reqwest.min.js"></script>
-    <script src="/js/min/base.min.js?v=006"></script>
-  </head>
-  <body>
-    <div id="container">
-      <header id="site-header">
-        <h1>Color Splash</h1>
-      </header>
+<div id="playground">
+  <form action="/pygmentize" method="POST" id="pygmentize-form">
+    <p><label for="lexer">Select a language</label></p>
+    <p>
+    <select name="lexer" id="lexer">
 
-      <section id="intro">
-        <p>
-          There are times when you need a code snippet in your page. You can use tons of available options
-          but I think that there is no better option than Pygments. The problem is that you have to have the Python
-          installed in order to use it. I find it kind of cumbersome, therefore I have created this online tool
-          for everyone to use. Enjoy!
-        </p>
-      </section>
+    <% @lexer_options.each_pair do |value, text| %>
+      <option value="<%= value %>"><%= text %></option>
+    <% end %>
 
-      <hr>
+    </select>
+    </p>
+    <p><label for="input-text">Enter your code</label></p>
+    <p><textarea id="input-text" name="input-text"></textarea></p>
+    <p><button type="button" onclick="pygmentizeCode(); return false;" id="submit">Pygmentize</button></p>
+  </form> <!--/pygmentize-form-->
 
-      <div id="playground">
-        <form action="/pygmentize" method="POST" id="pygmentize-form">
-          <p><label for="lexer">Select a language</label></p>
-          <p>
-          <select name="lexer" id="lexer">
+  <p class="label">Freshly baked HTML</p>
+  <div id="output-text">
+    <div style="text-align: center;">Your code will be available here.</div>
+  </div> <!--/output-text-container-->
+</div> <!--/playground-->
 
-          <% @lexer_options.each_pair do |value, text| %>
-            <option value="<%= value %>"><%= text %></option>
-          <% end %>
+<hr>
 
-          </select>
-          </p>
-          <p><label for="input-text">Enter your code</label></p>
-          <p><textarea id="input-text" name="input-text"></textarea></p>
-          <p><button type="button" onclick="pygmentizeCode(); return false;" id="submit">Pygmentize</button></p>
-        </form> <!--/pygmentize-form-->
-
-        <p class="label">Freshly baked HTML</p>
-        <div id="output-text">
-          <div style="text-align: center;">Your code will be available here.</div>
-        </div> <!--/output-text-container-->
-      </div> <!--/playground-->
-
-      <hr>
-
-      <footer>
-        <p>
-          Created in 2013 by <a href="http://dzerviniks.lv" title="Aigars Dzerviniks">Aigars Dzerviniks</a>.
-          No copyright, just use it!
-        </p>
-      </footer>
-    </div> <!--/container-->
-
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-40900557-2', 'semikols.lv');
-      ga('send', 'pageview');
-
-    </script>
-  </body>
-</html>
+<footer>
+  <p>
+    Created in 2013 by <a href="http://dzerviniks.lv" title="Aigars Dzerviniks">Aigars Dzerviniks</a>.
+    No copyright, just use it!
+  </p>
+</footer>
