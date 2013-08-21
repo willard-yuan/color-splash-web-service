@@ -40,11 +40,8 @@ end
 #
 # Returns JSON
 post '/pygmentize' do
-  plain_code = params['code']
-  lexer = params['lexer']
-  pygmented_code = Pygments.highlight(plain_code, lexer: lexer)
+  pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'])
   output_code = Pygments.highlight(pygmented_code, lexer: 'html')
-
 
   content_type :json
   { code: output_code }.to_json
@@ -63,9 +60,7 @@ end
 #
 # Returns JSON
 post '/pygmentize/raw' do
-  plain_code = params['code']
-  lexer = params['lexer']
-  pygmented_code = Pygments.highlight(plain_code, lexer: lexer)
+  pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'])
 
   content_type :json
   { code: pygmented_code }.to_json
