@@ -23,7 +23,7 @@ to worry about all the dependencies.
 There are 3 ways you can use Color Splash:
 
 - Use it directly from the site (genius).
-- Use it as a service by posting to the `http://color-splash.semikols.lv/pygmentize/raw` URL and sending a JSON object with `code` and `lexer` keys.
+- Use it as a service by posting to the `http://color-splash.semikols.lv/html/generate/raw` URL and sending a JSON object with `code` and `lexer` keys.
 - Fork it and create your own service :)
 
 ## TODO
