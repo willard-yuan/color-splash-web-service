@@ -20,4 +20,23 @@
     });
   };
 
+  this.generateStylesheet = function() {
+    var theme;
+    theme = document.getElementById('theme').value;
+    return reqwest({
+      url: '/stylesheets/generate',
+      type: 'json',
+      method: 'post',
+      data: {
+        theme: theme
+      },
+      error: function(error) {
+        return document.getElementById('output-text').innerHTML = 'An error occured while generating your CSS.';
+      },
+      success: function(response) {
+        return document.getElementById('output-text').innerHTML = response.code;
+      }
+    });
+  };
+
 }).call(this);

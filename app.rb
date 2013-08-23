@@ -60,10 +60,52 @@ end
 #
 # Returns JSON
 post '/pygmentize/raw' do
-  pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'])
+  pygmented_code = Pygments.highlight params['code'], lexer: params['lexer']
 
   content_type :json
   { code: pygmented_code }.to_json
+end
+
+# A view to generate a CSS code that can be used with Pygments.
+get '/stylesheets' do
+  @title = 'CSS @ Color Splash'
+  @styles = Pygments.styles
+
+  erb :stylesheets, layout: :default
+end
+
+# Uses Pygments built in functionality to generate a CSS code. After that it is
+# highlighted to be embeded in an HTML document.
+#
+# theme - a CSS them that is going to be generated
+#
+# Example
+#   POST /stylesheets/generate { 'theme': 'monokai' }
+#   # => { 'code': ---here goes the HTML code... }
+#
+# Returns JSON
+post '/stylesheets/generate' do
+  stylesheet_code = Pygments.css style: params[:theme]
+  pygmented_stylesheet_code = Pygments.highlight stylesheet_code, lexer: 'css'
+
+  content_type :json
+  { code: pygmented_stylesheet_code }.to_json
+end
+
+# Uses Pygments built in functionality to generate a CSS code.
+#
+# theme - a CSS them that is going to be generated
+#
+# Example
+#   POST /stylesheets/generate { 'theme': 'monokai' }
+#   # => { 'code': ---here goes the CSS code... }
+#
+# Returns JSON
+post '/stylesheets/generate/raw' do
+  stylesheet_code = Pygments.css style: params[:theme]
+
+  content_type :json
+  { code: stylesheet_code }.to_json
 end
 
 # Good old 404 page.

@@ -14,3 +14,18 @@ this.pygmentizeCode = ->
     success: (response)->
       document.getElementById('output-text').innerHTML = response.code
   )
+
+this.generateStylesheet = ->
+  theme = document.getElementById('theme').value
+
+  reqwest(
+    url: '/stylesheets/generate'
+    type: 'json'
+    method: 'post'
+    data:
+      theme: theme
+    error: (error)->
+      document.getElementById('output-text').innerHTML = 'An error occured while generating your CSS.'
+    success: (response)->
+      document.getElementById('output-text').innerHTML = response.code
+  )
