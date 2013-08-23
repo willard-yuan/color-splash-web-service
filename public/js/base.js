@@ -4,7 +4,7 @@
     inputText = document.getElementById('input-text').value;
     lexer = document.getElementById('lexer').value;
     return reqwest({
-      url: '/pygmentize',
+      url: '/html/generate',
       type: 'json',
       method: 'post',
       data: {

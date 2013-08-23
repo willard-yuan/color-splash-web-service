@@ -3,7 +3,7 @@ this.pygmentizeCode = ->
   lexer     = document.getElementById('lexer').value
 
   reqwest(
-    url: '/pygmentize'
+    url: '/html/generate'
     type: 'json'
     method: 'post'
     data:

@@ -3,6 +3,7 @@ require 'pygments'
 require 'json'
 require "sinatra/reloader" if development?
 
+# Home page view.
 get '/' do
   # Available lexers
   @lexer_options = {
@@ -28,6 +29,11 @@ get '/' do
   erb :index, layout: :default
 end
 
+# A view to pygmentize the code.
+get '/html' do
+  redirect to('/')
+end
+
 # Converts a string of code into an HTML with an HTML code that produces a syntax
 # highlighted string of code that can be embedded in any HTML document.
 #
@@ -35,11 +41,11 @@ end
 # lexer - a programming language identifier
 #
 # Example
-#   POST /pygmentize { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
+#   POST /html/generate { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
 #   # => { 'code': '...here goes the code that can be embedded in an HTML document...' }
 #
 # Returns JSON
-post '/pygmentize' do
+post '/html/generate' do
   pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'])
   output_code = Pygments.highlight(pygmented_code, lexer: 'html')
 
@@ -55,11 +61,11 @@ end
 # lexer - a programming language identifier
 #
 # Example
-#   POST /pygmentize { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
+#   POST /html/generate/raw { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
 #   # => { 'code': '...here goes the code that can be embedded in an HTML document...' }
 #
 # Returns JSON
-post '/pygmentize/raw' do
+post '/html/generate/raw' do
   pygmented_code = Pygments.highlight params['code'], lexer: params['lexer']
 
   content_type :json
