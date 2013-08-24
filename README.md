@@ -29,7 +29,6 @@ There are 3 ways you can use Color Splash:
 ## TODO
 
 - Add more lexers.
-- Add an option to generate a CSS file.
 - Create a better design.
 
 You can always find me on Twitter as [@aigarsdz](http://twitter.com/aigarsdz).
