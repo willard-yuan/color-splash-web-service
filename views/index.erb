@@ -1,17 +1,4 @@
-<header id="site-header">
-  <h1>Color Splash</h1>
-</header>
-
-<section id="intro">
-  <p>
-    There are times when you need a code snippet in your page. You can use tons of available options
-    but I think that there is no better option than Pygments. The problem is that you have to have the Python
-    installed in order to use it. I find it kind of cumbersome, therefore I have created this online tool
-    for everyone to use. Enjoy!
-  </p>
-</section>
-
-<hr>
+<%= erb :header %>
 
 <div id="playground">
   <form action="/pygmentize" method="POST" id="pygmentize-form">
@@ -19,7 +6,7 @@
     <p>
     <select name="lexer" id="lexer">
 
-    <% @lexer_options.each_pair do |value, text| %>
+    <% @lexer_options.each do |value, text| %>
       <option value="<%= value %>"><%= text %></option>
     <% end %>
 
@@ -27,7 +14,7 @@
     </p>
     <p><label for="input-text">Enter your code</label></p>
     <p><textarea id="input-text" name="input-text"></textarea></p>
-    <p><button type="button" onclick="pygmentizeCode(); return false;" id="submit">Pygmentize</button></p>
+    <p><button type="button" onclick="pygmentizeCode(); return false;" id="submit">Generate</button></p>
   </form> <!--/pygmentize-form-->
 
   <p class="label">Freshly baked HTML</p>

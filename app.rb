@@ -3,6 +3,31 @@ require 'pygments'
 require 'json'
 require "sinatra/reloader" if development?
 
+helpers do
+  # appends a class to an 'a' element if the path variable matches the current page.
+  #
+  # path - the path of the page
+  #
+  # Example
+  #
+  #   request.path_info
+  #   # => /blog
+  #
+  #   current '/blog'
+  #   # => class="current_path"
+  #
+  # Returns a string.
+  def current(path = '')
+    request.path_info == path ? 'class="current_page"' : nil
+  end
+end
+
+before do
+  expires 500, :public, :must_revalidate
+
+  @pages = { html: '/', css: '/stylesheets' }
+end
+
 # Home page view.
 get '/' do
   # Available lexers

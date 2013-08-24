@@ -26,9 +26,18 @@ label, .label {
   overflow: auto;
   padding: 10px; }
 
+.no-bottom {
+  margin-bottom: 0; }
+
+.group:after {
+  content: "";
+  display: table;
+  clear: both; }
+
 #container {
-  max-width: 900px;
+  max-width: 860px;
   margin: 0 auto;
+  padding: 0 20px;
   text-align: center; }
 
 #site-header {
@@ -37,10 +46,24 @@ label, .label {
     font-family: 'Allan', cursive;
     font-size: 4em; }
 
+#main-navigation {
+  margin-bottom: 40px;
+  margin-top: -1px;
+  text-align: left; }
+  #main-navigation a {
+    display: block;
+    padding: 5px 10px;
+    border: 1px solid white;
+    float: left; }
+    #main-navigation a:first-child {
+      border-right: none; }
+    #main-navigation a.current_page {
+      color: black; }
+
 #playground {
   color: #111; }
 
-#lexer {
+#lexer, #submit, #theme {
   width: 200px;
   height: 30px; }
 
@@ -48,10 +71,6 @@ label, .label {
   width: 96%;
   min-height: 200px;
   padding: 2%; }
-
-#submit {
-  width: 200px;
-  height: 30px; }
 
 div#output-text {
   padding: 20px;

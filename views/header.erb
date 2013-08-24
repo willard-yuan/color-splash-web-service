@@ -1,0 +1,20 @@
+<header id="site-header">
+  <h1>Color Splash</h1>
+</header>
+
+<section id="intro">
+  <p>
+    There are times when you need a code snippet in your page. You can use tons of available options
+    but I think that there is no better option than Pygments. The problem is that you have to have the Python
+    installed in order to use it. I find it kind of cumbersome, therefore I have created this online tool
+    for everyone to use. Enjoy!
+  </p>
+</section>
+
+<hr class="no-bottom">
+
+<nav id="main-navigation" class="group">
+  <% @pages.each do |name, page| %>
+  <a href="<%= page %>" <%= current page %>><%= name.upcase %></a>
+  <% end %>
+</nav>
