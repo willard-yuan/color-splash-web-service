@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'pygments'
 require 'json'
+require 'sinatra/cross_origin'
 require "sinatra/reloader" if development?
 
 helpers do
@@ -20,6 +21,10 @@ helpers do
   def current(path = '')
     request.path_info == path ? 'class="current_page"' : nil
   end
+end
+
+configure do
+  enable :cross_origin
 end
 
 before do
