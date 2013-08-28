@@ -5,7 +5,7 @@ require 'sinatra/cross_origin'
 require "sinatra/reloader" if development?
 
 helpers do
-  # appends a class to an 'a' element if the path variable matches the current page.
+  # appends a class to a 'a' element if the path variable matches the current page.
   #
   # path - the path of the page
   #
@@ -76,8 +76,8 @@ end
 #
 # Returns JSON
 post '/html/generate' do
-  pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'])
-  output_code = Pygments.highlight(pygmented_code, lexer: 'html')
+  pygmented_code = Pygments.highlight params['code'], lexer: params['lexer']
+  output_code = Pygments.highlight pygmented_code, lexer: 'html'
 
   content_type :json
   { code: output_code }.to_json
