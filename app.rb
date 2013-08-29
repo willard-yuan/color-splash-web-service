@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'pygments'
 require 'json'
+require 'yaml'
 require 'sinatra/cross_origin'
 require "sinatra/reloader" if development?
 
@@ -36,24 +37,7 @@ end
 # Home page view.
 get '/' do
   # Available lexers
-  @lexer_options = {
-    ruby: 'Ruby',
-    js: 'JavaScript',
-    php: 'PHP',
-    python: 'Python',
-    powershell: 'PowerShell',
-    bash: 'Bash',
-    css: 'css',
-    html: 'HTML',
-    java: 'Java',
-    c: 'C',
-    cpp: 'C++',
-    objectivec: 'Objective-C',
-    csharp: 'C#',
-    perl: 'Perl',
-    scss: 'SCSS'
-  }
-
+  @lexer_options = YAML.load_file 'lexers.yml'
   @title = 'Color Splash'
 
   erb :index, layout: :default
