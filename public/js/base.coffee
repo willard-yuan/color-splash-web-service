@@ -1,6 +1,7 @@
 this.pygmentizeCode = ->
   inputText = document.getElementById('input-text').value
   lexer     = document.getElementById('lexer').value
+  linenos   = document.getElementById('linenos').checked
 
   reqwest(
     url: '/html/generate'
@@ -9,6 +10,7 @@ this.pygmentizeCode = ->
     data:
       code: inputText
       lexer: lexer
+      linenos: linenos
     error: (error)->
       document.getElementById('output-text').innerHTML = 'An error occured while pygmenting your code.'
     success: (response)->

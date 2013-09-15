@@ -60,14 +60,14 @@ end
 #
 # Returns JSON
 post '/html/generate' do
-  pygmented_code = Pygments.highlight params['code'], lexer: params['lexer']
-  
-  if params.key?('linenos') && params['linenos']
-	output_code = Pygments.highlight(pygmented_code, lexer: 'html', 
-		options: { lonenos: 'inline' })
+  if params['linenos']
+    pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'],
+      options: { linenos: true })
   else
-	output_code = Pygments.highlight pygmented_code, lexer: 'html'
+    pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'])
   end
+  
+	output_code = Pygments.highlight(pygmented_code, lexer: 'html')
 
   content_type :json
   { code: output_code }.to_json
@@ -86,7 +86,12 @@ end
 #
 # Returns JSON
 post '/html/generate/raw' do
-  pygmented_code = Pygments.highlight params['code'], lexer: params['lexer']
+  if params['linenos']
+    pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'],
+      options: { linenos: true })
+  else
+    pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'])
+  end
 
   content_type :json
   { code: pygmented_code }.to_json
