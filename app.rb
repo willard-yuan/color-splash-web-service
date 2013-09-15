@@ -61,7 +61,13 @@ end
 # Returns JSON
 post '/html/generate' do
   pygmented_code = Pygments.highlight params['code'], lexer: params['lexer']
-  output_code = Pygments.highlight pygmented_code, lexer: 'html'
+  
+  if params.key?('linenos') && params['linenos']
+	output_code = Pygments.highlight(pygmented_code, lexer: 'html', 
+		options: { lonenos: 'inline' })
+  else
+	output_code = Pygments.highlight pygmented_code, lexer: 'html'
+  end
 
   content_type :json
   { code: output_code }.to_json
