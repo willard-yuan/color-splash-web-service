@@ -60,13 +60,13 @@ end
 #
 # Returns JSON
 post '/html/generate' do
-  if params['linenos']
+  if params['linenos'] == "true"
     pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'],
       options: { linenos: true })
   else
     pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'])
   end
-  
+
 	output_code = Pygments.highlight(pygmented_code, lexer: 'html')
 
   content_type :json
@@ -86,7 +86,7 @@ end
 #
 # Returns JSON
 post '/html/generate/raw' do
-  if params['linenos']
+  if params['linenos'] == "true"
     pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'],
       options: { linenos: true })
   else
