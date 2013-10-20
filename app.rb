@@ -31,21 +31,32 @@ end
 before do
   expires 500, :public, :must_revalidate
 
-  @pages = { html: '/', css: '/stylesheets' }
+  @pages = { html: '/color_splash', css: '/color_splash/stylesheets' }
 end
 
 # Home page view.
 get '/' do
+  @projects = [{ 
+    title: 'Color Splash', 
+    url: '/color_splash', 
+    image: '/images/color_splash.png'
+  }]
+  
+  erb :"semikols/index", layout: :semikols
+end
+
+# Color Splash project home view
+get '/color_splash' do
   # Available lexers
   @lexer_options = YAML.load_file 'lexers.yml'
   @title = 'Color Splash'
-
-  erb :index, layout: :default
+  
+  erb :"color_splash/index", layout: :color_splash
 end
 
 # A view to pygmentize the code.
-get '/html' do
-  redirect to('/')
+get '/color_splash/html' do
+  redirect to('/color_splash')
 end
 
 # Converts a string of code into an HTML with an HTML code that produces a syntax
@@ -55,11 +66,11 @@ end
 # lexer - a programming language identifier
 #
 # Example
-#   POST /html/generate { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
+#   POST /color_splash/html/generate { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
 #   # => { 'code': '...here goes the code that can be embedded in an HTML document...' }
 #
 # Returns JSON
-post '/html/generate' do
+post '/color_splash/html/generate' do
   if params['linenos'] == "true"
     pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'],
       options: { linenos: true })
@@ -81,11 +92,11 @@ end
 # lexer - a programming language identifier
 #
 # Example
-#   POST /html/generate/raw { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
+#   POST /color_splash/html/generate/raw { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
 #   # => { 'code': '...here goes the code that can be embedded in an HTML document...' }
 #
 # Returns JSON
-post '/html/generate/raw' do
+post '/color_splash/html/generate/raw' do
   if params['linenos'] == "true"
     pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'],
       options: { linenos: true })
@@ -98,11 +109,11 @@ post '/html/generate/raw' do
 end
 
 # A view to generate a CSS code that can be used with Pygments.
-get '/stylesheets' do
+get '/color_splash/stylesheets' do
   @title = 'CSS @ Color Splash'
   @styles = Pygments.styles
 
-  erb :stylesheets, layout: :default
+  erb :"color_splash/stylesheets", layout: :color_splash
 end
 
 # Uses Pygments built in functionality to generate a CSS code. After that it is
@@ -111,11 +122,11 @@ end
 # theme - a CSS them that is going to be generated
 #
 # Example
-#   POST /stylesheets/generate { 'theme': 'monokai' }
+#   POST /color_splash/stylesheets/generate { 'theme': 'monokai' }
 #   # => { 'code': ---here goes the HTML code... }
 #
 # Returns JSON
-post '/stylesheets/generate' do
+post '/color_splash/stylesheets/generate' do
   stylesheet_code = Pygments.css style: params[:theme]
   pygmented_stylesheet_code = Pygments.highlight stylesheet_code, lexer: 'css'
 
@@ -128,11 +139,11 @@ end
 # theme - a CSS them that is going to be generated
 #
 # Example
-#   POST /stylesheets/generate { 'theme': 'monokai' }
+#   POST /color_splash/stylesheets/generate { 'theme': 'monokai' }
 #   # => { 'code': ---here goes the CSS code... }
 #
 # Returns JSON
-post '/stylesheets/generate/raw' do
+post '/color_splash/stylesheets/generate/raw' do
   stylesheet_code = Pygments.css style: params[:theme]
 
   content_type :json
