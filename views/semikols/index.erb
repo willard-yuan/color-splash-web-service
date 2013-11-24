@@ -1,14 +1,21 @@
 <header id="main">
   <h1>Semikols</h1>
   <p class="tagline">Some useful projects</p>
+
+  <nav>
+    <% @projects.each do |p| %>
+    <a href="#<%= p[:id] %>"><%= p[:title] %></a>
+    <% end %>
+  </nav>
+
 </header>
 
 <% @projects.each do |p| %>
-<section class="project">
+<section class="project preview" id="<%= p[:id] %>">
+  <a href="<%= p[:url] %>"><img src="<%= p[:image] %>" alt="<%= p[:title] %>"></a>
   <header>
-    <h2><a href="<%= p[:url] %>"><%= p[:title] %></a></h2>
+    <h2><%= p[:title] %></h2>
     <p class="project-description">Online Pygments service</p>
   </header>
-  <p><img src="<%= p[:image] %>" alt="<%= p[:title] %>"></p>
 </section>
 <% end %>

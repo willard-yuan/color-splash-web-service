@@ -1,55 +1,89 @@
 * {
-  margin: 0;
+  margin:  0;
   padding: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 body {
-  background: #333333 url(/images/office.png) repeat;
-  color: #f2f2f2;
+  background-color: #DCDDD8;
+  color: #333;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
-h1, h2, h3, h4, h5, p, ul, ol {
+h1, h2, h3, h4, h5, h6, p, ul, li, blockquote {
   margin-bottom: 20px;
 }
 
 a {
-  color: #195f84;
+  color: #D74B4B;
   text-decoration: none;
-}
-a:visited {
-  color: #39789a;
-}
-a:hover {
-  color: #054160;
 }
 
 img {
   max-width: 100%;
   height: auto;
+  border: none;
 }
 
 #container {
-  max-width: 760px;
-  margin: 20px auto 0;
-  padding: 0 20px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-header#main {
+#main {
   text-align: center;
+}
+
+#main h1 {
+  font-size: 4rem;
+  margin-bottom: 5px;
+}
+
+.tagline {
+  font-size: 1.2rem;
+}
+
+#main nav {
+  background-color: #354B5E;
+  min-height: 50px;
+  font-size: 1.4rem;
   margin-bottom: 50px;
+  margin-top: 30px;
 }
-header#main h1 {
-  font-size: 5em;
+
+#main nav a {
+  display: inline-block;
+  height: 50px;
+  padding: 10px 10px 0;
+  margin: 0 10px;
+  color: white;
 }
-header#main p {
-  color: #8d8d8d;
-  font-style: italic;
+
+#main nav a:hover {
+  background-color: #475F77;
+}
+
+.preview {
+  border: 1px solid #666666;
+  padding: 10px 10px 0 10px;
+  background-color: white;
 }
 
 .project {
-  color: #333333;
+  margin-bottom: 50px;
 }
+
 .project header {
-  background-color: #cccccc;
-  padding: 10px 20px 20px;
+  margin-top: 20px;
+  font-family: 'Just Me Again Down Here', cursive;
+}
+
+.project header h2 {
+  margin: 0 20px;
+}
+
+.project header p {
+  margin: 0 40px 20px;
+  font-size: 1.2rem;
 }

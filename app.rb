@@ -1,9 +1,12 @@
+$:.unshift File.dirname(__FILE__)
+
 require 'sinatra'
-require 'pygments'
 require 'json'
-require 'yaml'
 require 'sinatra/cross_origin'
-require "sinatra/reloader" if development?
+require 'sinatra/namespace'
+require 'sinatra/reloader' if development?
+
+require 'projects/color_splash'
 
 helpers do
   # appends a class to a 'a' element if the path variable matches the current page.
@@ -32,122 +35,117 @@ before do
   expires 500, :public, :must_revalidate
 
   @pages = { html: '/color_splash', css: '/color_splash/stylesheets' }
+  @color_splash = Project::ColorSplash.new
 end
 
 # Home page view.
 get '/' do
-  @projects = [{ 
-    title: 'Color Splash', 
-    url: '/color_splash', 
+  @projects = [{
+    id: 'color_splash',
+    title: 'Color Splash',
+    url: '/color_splash',
     image: '/images/color_splash.png'
   }]
-  
+
   erb :"semikols/index", layout: :semikols
 end
 
-# Color Splash project home view
-get '/color_splash' do
-  # Available lexers
-  @lexer_options = YAML.load_file 'lexers.yml'
-  @title = 'Color Splash'
-  
-  erb :"color_splash/index", layout: :color_splash
-end
+namespace '/color_splash' do
+  get do
+    # Available lexers
+    @lexer_options = @color_splash.lexers
+    @title = @color_splash.title
 
-# A view to pygmentize the code.
-get '/color_splash/html' do
-  redirect to('/color_splash')
-end
-
-# Converts a string of code into an HTML with an HTML code that produces a syntax
-# highlighted string of code that can be embedded in any HTML document.
-#
-# code - a String containing a code snippet
-# lexer - a programming language identifier
-#
-# Example
-#   POST /color_splash/html/generate { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
-#   # => { 'code': '...here goes the code that can be embedded in an HTML document...' }
-#
-# Returns JSON
-post '/color_splash/html/generate' do
-  if params['linenos'] == "true"
-    pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'],
-      options: { linenos: true })
-  else
-    pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'])
+    erb :"color_splash/index", layout: :color_splash
   end
 
-	output_code = Pygments.highlight(pygmented_code, lexer: 'html')
-
-  content_type :json
-  { code: output_code }.to_json
-end
-
-
-# Converts a string of code into an HTML with a syntax highlighted string of code that
-# can be embedded in any HTML document.
-#
-# code - a String containing a code snippet
-# lexer - a programming language identifier
-#
-# Example
-#   POST /color_splash/html/generate/raw { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
-#   # => { 'code': '...here goes the code that can be embedded in an HTML document...' }
-#
-# Returns JSON
-post '/color_splash/html/generate/raw' do
-  if params['linenos'] == "true"
-    pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'],
-      options: { linenos: true })
-  else
-    pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'])
+  # A view to pygmentize the code.
+  get '/html' do
+    redirect to('/color_splash')
   end
 
-  content_type :json
-  { code: pygmented_code }.to_json
-end
+  # Converts a string of code into an HTML with an HTML code that produces a syntax
+  # highlighted string of code that can be embedded in any HTML document.
+  #
+  # code - a String containing a code snippet
+  # lexer - a programming language identifier
+  #
+  # Example
+  #   POST /color_splash/html/generate { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
+  #   # => { 'code': '...here goes the code that can be embedded in an HTML document...' }
+  #
+  # Returns JSON
+  post '/html/generate' do
+    output_code = @color_splash.generate(params['code'], params['lexer'], params['linenos'])
 
-# A view to generate a CSS code that can be used with Pygments.
-get '/color_splash/stylesheets' do
-  @title = 'CSS @ Color Splash'
-  @styles = Pygments.styles
+    content_type :json
+    { code: output_code }.to_json
+  end
 
-  erb :"color_splash/stylesheets", layout: :color_splash
-end
+  # Converts a string of code into an HTML with a syntax highlighted string of code that
+  # can be embedded in any HTML document.
+  #
+  # code - a String containing a code snippet
+  # lexer - a programming language identifier
+  #
+  # Example
+  #   POST /color_splash/html/generate/raw { 'code': 'puts "Hello, World!"', 'lexer': 'ruby' }
+  #   # => { 'code': '...here goes the code that can be embedded in an HTML document...' }
+  #
+  # Returns JSON
+  post '/html/generate/raw' do
+    if params['linenos'] == "true"
+      pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'],
+        options: { linenos: true })
+    else
+      pygmented_code = Pygments.highlight(params['code'], lexer: params['lexer'])
+    end
 
-# Uses Pygments built in functionality to generate a CSS code. After that it is
-# highlighted to be embeded in an HTML document.
-#
-# theme - a CSS them that is going to be generated
-#
-# Example
-#   POST /color_splash/stylesheets/generate { 'theme': 'monokai' }
-#   # => { 'code': ---here goes the HTML code... }
-#
-# Returns JSON
-post '/color_splash/stylesheets/generate' do
-  stylesheet_code = Pygments.css style: params[:theme]
-  pygmented_stylesheet_code = Pygments.highlight stylesheet_code, lexer: 'css'
+    content_type :json
+    { code: pygmented_code }.to_json
+  end
 
-  content_type :json
-  { code: pygmented_stylesheet_code }.to_json
-end
+  # A view to generate a CSS code that can be used with Pygments.
+  get '/stylesheets' do
+    @title = 'CSS @ Color Splash'
+    @styles = Pygments.styles
 
-# Uses Pygments built in functionality to generate a CSS code.
-#
-# theme - a CSS them that is going to be generated
-#
-# Example
-#   POST /color_splash/stylesheets/generate { 'theme': 'monokai' }
-#   # => { 'code': ---here goes the CSS code... }
-#
-# Returns JSON
-post '/color_splash/stylesheets/generate/raw' do
-  stylesheet_code = Pygments.css style: params[:theme]
+    erb :"color_splash/stylesheets", layout: :color_splash
+  end
 
-  content_type :json
-  { code: stylesheet_code }.to_json
+  # Uses Pygments built in functionality to generate a CSS code. After that it is
+  # highlighted to be embeded in an HTML document.
+  #
+  # theme - a CSS them that is going to be generated
+  #
+  # Example
+  #   POST /color_splash/stylesheets/generate { 'theme': 'monokai' }
+  #   # => { 'code': ---here goes the HTML code... }
+  #
+  # Returns JSON
+  post '/stylesheets/generate' do
+    stylesheet_code = Pygments.css style: params[:theme]
+    pygmented_stylesheet_code = Pygments.highlight stylesheet_code, lexer: 'css'
+
+    content_type :json
+    { code: pygmented_stylesheet_code }.to_json
+  end
+
+  # Uses Pygments built in functionality to generate a CSS code.
+  #
+  # theme - a CSS them that is going to be generated
+  #
+  # Example
+  #   POST /color_splash/stylesheets/generate { 'theme': 'monokai' }
+  #   # => { 'code': ---here goes the CSS code... }
+  #
+  # Returns JSON
+  post '/stylesheets/generate/raw' do
+    stylesheet_code = Pygments.css style: params[:theme]
+
+    content_type :json
+    { code: stylesheet_code }.to_json
+  end
 end
 
 # Good old 404 page.
@@ -155,5 +153,5 @@ not_found do
   @title = '404 @ Color Splash'
 
   status 404
-  erb :not_found, layout: :default
+  erb :not_found, layout: :semikols
 end
