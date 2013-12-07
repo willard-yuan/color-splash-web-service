@@ -5,7 +5,7 @@
     lexer = document.getElementById('lexer').value;
     linenos = document.getElementById('linenos').checked;
     return reqwest({
-      url: '/color_splash/html/generate',
+      url: '/color-splash/html/generate',
       type: 'json',
       method: 'post',
       data: {
@@ -26,7 +26,7 @@
     var theme;
     theme = document.getElementById('theme').value;
     return reqwest({
-      url: '/color_splash/stylesheets/generate',
+      url: '/color-splash/stylesheets/generate',
       type: 'json',
       method: 'post',
       data: {

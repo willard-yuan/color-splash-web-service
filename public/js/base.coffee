@@ -4,7 +4,7 @@ this.pygmentizeCode = ->
   linenos   = document.getElementById('linenos').checked
 
   reqwest(
-    url: '/color_splash/html/generate'
+    url: '/color-splash/html/generate'
     type: 'json'
     method: 'post'
     data:
@@ -21,7 +21,7 @@ this.generateStylesheet = ->
   theme = document.getElementById('theme').value
 
   reqwest(
-    url: '/color_splash/stylesheets/generate'
+    url: '/color-splash/stylesheets/generate'
     type: 'json'
     method: 'post'
     data:
