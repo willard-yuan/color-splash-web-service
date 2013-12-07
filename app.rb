@@ -34,7 +34,7 @@ end
 before do
   expires 500, :public, :must_revalidate
 
-  @pages = { html: '/color_splash', css: '/color_splash/stylesheets' }
+  @pages = { html: '/color-splash', css: '/color-splash/stylesheets' }
   @color_splash = Project::ColorSplash.new
 end
 
@@ -43,14 +43,14 @@ get '/' do
   @projects = [{
     id: 'color_splash',
     title: 'Color Splash',
-    url: '/color_splash',
+    url: '/color-splash',
     image: '/images/color_splash.png'
   }]
 
   erb :"semikols/index", layout: :semikols
 end
 
-namespace '/color_splash' do
+namespace '/color-splash' do
   get do
     # Available lexers
     @lexer_options = @color_splash.lexers
