@@ -1,11 +1,12 @@
 (function() {
   this.pygmentizeCode = function() {
-    var inputText, lexer, linenos;
+    var inputText, lexer, linenos, url;
+    url = document.getElementById('pygmentize-form').action;
     inputText = document.getElementById('input-text').value;
     lexer = document.getElementById('lexer').value;
     linenos = document.getElementById('linenos').checked;
     return reqwest({
-      url: '/color-splash/html/generate',
+      url: url,
       type: 'json',
       method: 'post',
       data: {
@@ -23,10 +24,11 @@
   };
 
   this.generateStylesheet = function() {
-    var theme;
+    var theme, url;
+    url = document.getElementById('style-form').action;
     theme = document.getElementById('theme').value;
     return reqwest({
-      url: '/color-splash/stylesheets/generate',
+      url: url,
       type: 'json',
       method: 'post',
       data: {
