@@ -1,28 +1,38 @@
 <%= erb :"color_splash/header" %>
 
-<div id="playground">
-  <form action="/color-splash/html/generate" method="POST" id="pygmentize-form">
-    <p><label for="lexer">Select a language</label></p>
-    <p>
-    <select name="lexer" id="lexer">
+<div id="playground" class="row">
+  <div class="large-6 columns">
+    <form action="/color-splash/html/generate" method="POST" id="pygmentize-form">
+      <div class="row">
+        <label for="lexer">Select a language</label>
+        <select name="lexer" id="lexer">
 
-    <% @lexer_options.each do |value, text| %>
-      <option value="<%= value %>"><%= text %></option>
-    <% end %>
+        <% @lexer_options.each do |value, text| %>
+          <option value="<%= value %>"><%= text %></option>
+        <% end %>
 
-    </select>
-    </p>
-    <p><label>Add line numbers</label>
-    <input type="checkbox" value="1" id="linenos"></p>
-    <p><label for="input-text">Enter your code</label></p>
-    <p><textarea id="input-text" name="input-text"></textarea></p>
-    <p><button type="button" onclick="pygmentizeCode(); return false;" id="submit">Generate</button></p>
-  </form> <!--/pygmentize-form-->
+        </select>
+      </div>
 
-  <p class="label">Freshly baked HTML</p>
-  <div id="output-text">
-    <div style="text-align: center;">Your code will be available here.</div>
-  </div> <!--/output-text-container-->
+      <div class="row">
+        <label for="linenos">Add line numbers</label>
+        <input type="checkbox" value="1" id="linenos">
+      </div>
+
+      <div class="row">
+        <label for="input-text">Enter your code</label>
+        <textarea id="input-text" name="input-text" rows="20"></textarea>
+
+        <button type="button" onclick="pygmentizeCode(); return false;" id="submit">Generate</button>
+      </div>
+    </form> <!--/pygmentize-form-->
+  </div>
+  <div class="large-6 columns">
+    <p class="label secondary">Freshly baked HTML</p>
+    <div id="output-text">
+      <div style="text-align: center;" id="placeholder-field">Your code will be available here.</div>
+    </div> <!--/output-text-container-->
+  </div>
 </div> <!--/playground-->
 
 <hr>
