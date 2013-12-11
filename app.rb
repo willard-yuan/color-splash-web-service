@@ -6,7 +6,7 @@ require 'sinatra/cross_origin'
 require 'sinatra/namespace'
 require 'sinatra/reloader' if development?
 
-require 'projects/color_splash/color_splash'
+require 'lib/color_splash/color_splash'
 
 helpers do
   # appends a class to a 'a' element if the path variable matches the current page.
