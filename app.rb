@@ -44,7 +44,7 @@ get '/' do
     id: 'color_splash',
     title: 'Color Splash',
     url: '/color-splash',
-    image: '/images/color_splash.png'
+    image: '/images/color_splash_2.png'
   }]
 
   erb :"semikols/index", layout: :semikols
