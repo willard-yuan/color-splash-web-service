@@ -1,14 +1,14 @@
 # Public: Calls a service that pygmentizes code.
-this.pygmentizeCode = ->
+pygmentizeCode = (editor)->
   url       = document.getElementById('pygmentize-form').action
-  inputText = document.getElementById('input-text').value
+  inputText = editor.getValue()
   lexer     = document.getElementById('lexer').value
   linenos   = document.getElementById('linenos').checked
 
-  reqwest(
+  $.ajax
     url: url
-    type: 'json'
-    method: 'post'
+    dataType: 'json'
+    type: 'POST'
     data:
       code: inputText
       lexer: lexer
@@ -17,24 +17,22 @@ this.pygmentizeCode = ->
       document.getElementById('output-text').innerHTML = 'An error occured while pygmenting your code.'
     success: (response)->
       document.getElementById('output-text').innerHTML = response.code
-  )
 
 # Public: Calls a service that generates the CSS code for the syntax highlighting.
 this.generateStylesheet = ->
   url   = document.getElementById('style-form').action
   theme = document.getElementById('theme').value
 
-  reqwest(
+  $.ajax
     url: url
-    type: 'json'
-    method: 'post'
+    dataType: 'json'
+    type: 'POST'
     data:
       theme: theme
     error: (error)->
       document.getElementById('output-text').innerHTML = 'An error occured while generating your CSS.'
     success: (response)->
       document.getElementById('output-text').innerHTML = response.code
-  )
 
 $(document).ready ->
   options =
@@ -93,3 +91,6 @@ $(document).ready ->
     selectedMode = @.value
     $.getScript modes[selectedMode]["file"], (data)->
       codeMirror.setOption "mode", modes[selectedMode]["mode"]
+
+  $("#pygmentize-submit").click ->
+    pygmentizeCode codeMirror

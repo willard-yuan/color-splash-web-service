@@ -1,14 +1,16 @@
 (function() {
-  this.pygmentizeCode = function() {
+  var pygmentizeCode;
+
+  pygmentizeCode = function(editor) {
     var inputText, lexer, linenos, url;
     url = document.getElementById('pygmentize-form').action;
-    inputText = document.getElementById('input-text').value;
+    inputText = editor.getValue();
     lexer = document.getElementById('lexer').value;
     linenos = document.getElementById('linenos').checked;
-    return reqwest({
+    return $.ajax({
       url: url,
-      type: 'json',
-      method: 'post',
+      dataType: 'json',
+      type: 'POST',
       data: {
         code: inputText,
         lexer: lexer,
@@ -27,10 +29,10 @@
     var theme, url;
     url = document.getElementById('style-form').action;
     theme = document.getElementById('theme').value;
-    return reqwest({
+    return $.ajax({
       url: url,
-      type: 'json',
-      method: 'post',
+      dataType: 'json',
+      type: 'POST',
       data: {
         theme: theme
       },
@@ -111,12 +113,15 @@
         file: "/js/mode/perl/perl.js"
       }
     };
-    return $("#lexer").change(function(el) {
+    $("#lexer").change(function(el) {
       var selectedMode;
       selectedMode = this.value;
       return $.getScript(modes[selectedMode]["file"], function(data) {
         return codeMirror.setOption("mode", modes[selectedMode]["mode"]);
       });
+    });
+    return $("#pygmentize-submit").click(function() {
+      return pygmentizeCode(codeMirror);
     });
   });
 
