@@ -16,7 +16,6 @@
     <link href='http://fonts.googleapis.com/css?family=Alegreya+SC' rel='stylesheet' type='text/css'>
 
     <script src="/js/reqwest.min.js"></script>
-    <script src="/js/min/base.min.js"></script>
     <script src="/foundation-5/js/vendor/custom.modernizr.js"></script>
     <script src="/foundation-5/js/vendor/jquery.js"></script>
     <script src="/foundation-5/js/foundation.min.js"></script>
@@ -24,6 +23,7 @@
     <script src="/js/matchbrackets.js"></script>
     <script src="/js/closebrackets.js"></script>
     <script src="/js/mode/ruby/ruby.js"></script>
+    <script src="/js/min/base.min.js"></script>
 
   </head>
   <body>
@@ -46,18 +46,6 @@
       ga('create', 'UA-40900557-2', 'semikols.lv');
       ga('send', 'pageview');
 
-    </script>
-
-    <div id="mode-placehodler"></div>
-
-    <script>
-    var codeMirror = CodeMirror.fromTextArea(document.getElementById("input-text"), {
-          lineNumbers: true,
-          tabSize: 2,
-          mode: "text/x-ruby",
-          matchBrackets: true,
-          autoCloseBrackets: true
-        });
     </script>
   </body>
 </html>

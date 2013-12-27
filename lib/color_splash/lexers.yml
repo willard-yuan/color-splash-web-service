@@ -9,7 +9,5 @@ html: HTML
 java: Java
 c: C
 cpp: C++
-objectivec: Objective-C
 csharp: C#
 perl: Perl
-scss: SCSS
