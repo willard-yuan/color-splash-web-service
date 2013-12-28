@@ -90,7 +90,7 @@
       },
       html: {
         mode: "text/html",
-        file: "/js/mode/htmlmixed/htmlmixed.js"
+        file: "/js/mode/xml/xml.js"
       },
       java: {
         mode: "text/x-java",

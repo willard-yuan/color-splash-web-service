@@ -70,7 +70,7 @@ $(document).ready ->
       file: "/js/mode/css/css.js"
     html:
       mode: "text/html"
-      file: "/js/mode/htmlmixed/htmlmixed.js"
+      file: "/js/mode/xml/xml.js"
     java:
       mode: "text/x-java"
       file: "/js/mode/clike/clike.js"
