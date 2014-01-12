@@ -62,6 +62,7 @@ label {
   border: 1px solid #e7e7e7;
   height: 470px;
   margin-top: 10px;
+  margin-bottom: 40px;
   overflow: auto;
 }
 

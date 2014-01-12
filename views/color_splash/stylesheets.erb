@@ -1,27 +1,28 @@
 <%= erb :"color_splash/header" %>
 
 <div id="playground" class="row">
-  <form action="/color-splash/stylesheets/generate" method="POST" id="style-form">
-    <p><label for="theme">Select a theme</label></p>
-    <p>
-    <select name="theme" id="theme">
+  <div class="col-md-12">
+    <form action="/color-splash/stylesheets/generate" method="POST" id="style-form">
+      <p><label for="theme">Select a theme</label></p>
+      <p>
+      <select name="theme" id="theme" class="form-control">
 
-    <% @styles.each do |style| %>
-      <option value="<%= style %>"><%= style.capitalize %></option>
-    <% end %>
+      <% @styles.each do |style| %>
+        <option value="<%= style %>"><%= style.capitalize %></option>
+      <% end %>
 
-    </select>
-    </p>
-    <p><button type="button" onclick="generateStylesheet(); return false;" id="submit">Generate</button></p>
-  </form> <!--/pygmentize-form-->
+      </select>
+      </p>
+      <p><button type="button" onclick="generateStylesheet(); return false;"
+                 id="submit" class="btn btn-primary">Generate</button></p>
+    </form> <!--/pygmentize-form-->
 
-  <p class="label secondary">Freshly baked CSS</p>
-  <div id="output-text">
-    <div style="text-align: center;" id="placeholder-field">Your code will be available here.</div>
-  </div> <!--/output-text-container-->
-</div> <!--/playground-->
-
-<hr>
+    <p class="label secondary">Freshly baked CSS</p>
+    <div id="output-text">
+      <div style="text-align: center;" id="placeholder-field">Your code will be available here.</div>
+    </div> <!--/output-text-container-->
+  </div> <!--/playground-->
+</div>
 
 <footer>
   <p>
