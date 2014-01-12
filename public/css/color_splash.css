@@ -1,3 +1,5 @@
+/*==== General Style
+==============================================================================*/
 * {
   margin: 0;
   padding: 0;
@@ -22,6 +24,8 @@ label {
   font-weight: normal;
 }
 
+/*==== Content
+==============================================================================*/
 #container {
   max-width: 1200px;
   padding: 0 20px;
@@ -75,6 +79,8 @@ footer p {
   font-size: 1.3rem;
 }
 
+/*==== Media Queries
+==============================================================================*/
 @media (max-width: 1200px) {
   #container {
     background-size: 970px auto;
