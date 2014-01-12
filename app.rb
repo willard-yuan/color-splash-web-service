@@ -23,7 +23,7 @@ helpers do
   #
   # Returns a string.
   def current(path = '')
-    request.path_info == path ? 'class="current"' : nil
+    request.path_info == path
   end
 end
 

@@ -4,16 +4,22 @@
 }
 
 body {
-  font-family: 'Alegreya SC', serif;
+  font-family: 'Vollkorn', serif;
   line-height: 1.5;
+  font-size: 1.7rem;
 }
 
 p {
-  font-size: 1.3rem;
+  margin-bottom: 20px;
 }
 
 label {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  font-weight: normal;
+}
+
+.label {
+  font-weight: normal;
 }
 
 #container {
@@ -24,14 +30,14 @@ label {
 }
 
 #site-header {
-  padding-top: 320px;
+  padding-top: 330px;
   text-align: center;
   margin-bottom: 50px;
 }
 
 #site-header h1 {
-  font-size: 4.5rem;
-  font-family: 'Alegreya SC', serif;
+  font-family: 'Vollkorn', serif;
+  font-size: 7rem;
 }
 
 #intro {
@@ -51,8 +57,11 @@ label {
 #output-text {
   border: 1px solid #e7e7e7;
   height: 470px;
+  margin-top: 10px;
   overflow: auto;
 }
+
+.output-field { margin-top: 20px;}
 
 #placeholder-field {
   margin-top: 50px;
@@ -63,31 +72,21 @@ footer {
 }
 
 footer p {
-  font-size: 1rem;
+  font-size: 1.3rem;
 }
 
-@media (max-width: 1187px) {
+@media (max-width: 1200px) {
   #container {
-    background-size: 1087px auto;
+    background-size: 970px auto;
   }
 }
 
-@media (max-width: 1143px) {
+@media (max-width: 1000px) {
   #container {
-    background-size: auto 240px;
+    background-size: 720px auto;
   }
 
   #site-header {
-    padding-top: 200px;
-  }
-}
-
-@media (max-width: 475px) {
-  #site-header h1 {
-    font-size: 3rem;
-  }
-
-  #site-header {
-    padding-top: 250px;
+    padding-top: 290px;
   }
 }

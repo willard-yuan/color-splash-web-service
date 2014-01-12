@@ -1,34 +1,33 @@
 <%= erb :"color_splash/header" %>
 
 <div id="playground" class="row">
-  <div class="large-6 columns">
+  <div class="col-md-6">
     <form action="/color-splash/html/generate" method="POST" id="pygmentize-form">
-      <div class="row">
+      <p>
         <label for="lexer">Select a language</label>
-        <select name="lexer" id="lexer">
+        <select name="lexer" id="lexer" class="form-control">
 
         <% @lexer_options.each do |value, text| %>
           <option value="<%= value %>"><%= text %></option>
         <% end %>
 
         </select>
-      </div>
+      </p>
 
-      <div class="row">
+      <p>
         <label for="linenos">Add line numbers</label>
         <input type="checkbox" value="1" id="linenos">
-      </div>
+      </p>
 
-      <div class="row">
-        <label for="input-text">Enter your code</label>
-        <p><textarea id="input-text" name="input-text" rows="20"></textarea></p>
+      <label for="input-text">Enter your code</label>
+      <p style="border: solid 1px #ccc;"><textarea id="input-text" name="input-text" rows="20"></textarea></p>
 
-        <button type="button" id="pygmentize-submit">Generate</button>
-      </div>
+      <button type="button" id="pygmentize-submit" class="btn btn-primary">Generate</button>
     </form> <!--/pygmentize-form-->
   </div>
-  <div class="large-6 columns">
-    <p class="label secondary">Freshly baked HTML</p>
+
+  <div class="output-field col-md-6">
+    <p class="label label-info">Freshly baked HTML</p>
     <div id="output-text">
       <div style="text-align: center;" id="placeholder-field">Your code will be available here.</div>
     </div> <!--/output-text-container-->

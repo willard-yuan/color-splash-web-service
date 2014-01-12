@@ -2,7 +2,7 @@
   <h1>Color Splash</h1>
 </header>
 
-<section id="intro" class="row">
+<section id="intro">
   <p>
     There are times when you need a code snippet in your page. You can use tons of available options,
     but I think that there is no better option than Pygments. The problem is that you have to have Python
@@ -11,10 +11,14 @@
   </p>
 </section>
 
-<div class="row">
-  <nav id="main-navigation" class="breadcrumbs">
-    <% @pages.each do |name, page| %>
-    <a href="<%= page %>" <%= current page %>><%= name.upcase %></a>
+<nav id="main-navigation">
+  <ul class="breadcrumb">
+  <% @pages.each do |name, page| %>
+    <% if current page %>
+    <li class="active"><%= name.upcase %></li>
+    <% else %>
+    <li><a href="<%= page %>"><%= name.upcase %></a></li>
     <% end %>
-  </nav>
-</div>
+  <% end %>
+  </ul>
+</nav>
