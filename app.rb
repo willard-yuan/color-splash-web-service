@@ -19,7 +19,7 @@ helpers do
   #   # => /blog
   #
   #   current '/blog'
-  #   # => class="current_path"
+  #   # => true
   #
   # Returns a string.
   def current(path = '')
