@@ -34,25 +34,18 @@ end
 
 before do
   expires 500, :public, :must_revalidate
-
-  @pages = { html: '/color-splash', css: '/color-splash/stylesheets' }
 end
 
 # Home page view.
 get '/' do
-  @projects = [{
-    id: 'color_splash',
-    title: 'Color Splash',
-    url: '/color-splash',
-    image: '/images/color_splash_3.png'
-  }]
+  @projects = YAML.load_file('lib/projects.yml')['projects']
 
   erb :"semikols/index", layout: :semikols
 end
 
 # Good old 404 page.
 not_found do
-  @title = '404 @ Color Splash'
+  @title = '404 @ Semikols'
 
   status 404
   erb :not_found, layout: :semikols
