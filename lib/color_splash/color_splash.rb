@@ -9,6 +9,7 @@ module Project
     def initialize
       @title = 'Color Splash'
       @lexers = YAML.load_file 'lib/color_splash/lexers.yml'
+      @styles = Pygments.styles
     end
 
     # Public: Wraps a code into HTML tags that can be styled with CSS
