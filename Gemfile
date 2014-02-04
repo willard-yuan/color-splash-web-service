@@ -6,5 +6,4 @@ gem 'json'
 
 group :development do
   gem 'sinatra-contrib'
-  gem 'pry-remote'
 end
