@@ -5,6 +5,9 @@ pygmentizeCode = (editor)->
   lexer     = document.getElementById('lexer').value
   linenos   = document.getElementById('linenos').checked
 
+  # Indicate that the request is in process
+  document.getElementById('pygmentize-submit').classList.add 'loading'
+
   $.ajax
     url: url
     dataType: 'json'
@@ -15,8 +18,10 @@ pygmentizeCode = (editor)->
       linenos: linenos
     error: (error)->
       document.getElementById('output-text').innerHTML = 'An error occured while pygmenting your code.'
+      document.getElementById('pygmentize-submit').classList.remove 'loading'
     success: (response)->
       document.getElementById('output-text').innerHTML = response.code
+      document.getElementById('pygmentize-submit').classList.remove 'loading'
 
 # Public: Calls a service that generates the CSS code for the syntax highlighting.
 this.generateStylesheet = ->

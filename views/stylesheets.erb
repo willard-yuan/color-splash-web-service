@@ -1,0 +1,29 @@
+<section class="the-tool two column stackable ui grid">
+  <form action="/stylesheets/generate" method="POST" id="style-form"
+      class="ui form sixteen wide column">
+    <div class="field">
+      <label for="theme">Select a theme</label>
+      <div class="select-style">
+        <select name="theme" id="theme" class="form-control">
+
+        <% @styles.each do |style| %>
+          <option value="<%= style %>"><%= style.capitalize %></option>
+        <% end %>
+
+        </select>
+      </div>
+    </div>
+
+    <button type="button" onclick="generateStylesheet(); return false;"
+            id="submit" class="ui green submit button">Generate</button>
+  </form>
+
+  <output class="ui form sixteen wide column">
+    <div style="position: relative;">
+      <div class="ui right red corner label">
+        <div class="text">Code</div>
+      </div>
+      <div id="output-text"></div>
+    </div>
+  </output>
+</section>

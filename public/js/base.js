@@ -7,6 +7,7 @@
     inputText = editor.getValue();
     lexer = document.getElementById('lexer').value;
     linenos = document.getElementById('linenos').checked;
+    document.getElementById('pygmentize-submit').classList.add('loading');
     return $.ajax({
       url: url,
       dataType: 'json',
@@ -17,10 +18,12 @@
         linenos: linenos
       },
       error: function(error) {
-        return document.getElementById('output-text').innerHTML = 'An error occured while pygmenting your code.';
+        document.getElementById('output-text').innerHTML = 'An error occured while pygmenting your code.';
+        return document.getElementById('pygmentize-submit').classList.remove('loading');
       },
       success: function(response) {
-        return document.getElementById('output-text').innerHTML = response.code;
+        document.getElementById('output-text').innerHTML = response.code;
+        return document.getElementById('pygmentize-submit').classList.remove('loading');
       }
     });
   };

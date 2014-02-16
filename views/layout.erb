@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Color Splash</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/codemirror.css">
+    <link rel="stylesheet" href="/css/main.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here&subset=latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/semantic/packaged/javascript/semantic.min.js"></script>
+
+    <script src="/js/codemirror.js"></script>
+    <script src="/js/matchbrackets.js"></script>
+    <script src="/js/closebrackets.js"></script>
+    <script src="/js/mode/ruby/ruby.js"></script>
+
+    <script src="/js/min/base.min.js"></script>
+  </head>
+  <body>
+    <a href="https://github.com/aigarsdz" id="ribbon"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+    <div id="container">
+      <header id="main">
+        <h1>Color Splash</h1>
+        <p class="tagline">
+          There are times when you need a code snippet in your page. You can use
+          tons of available options, but I think that there is no better option
+          than Pygments. The problem is that you have to have Python installed in
+          order to use it. I find it kind of cumbersome, therefore I have created
+          this online tool for everyone to use. Enjoy!
+        </p>
+
+        <nav class="ui secondary pointing menu">
+          <a href="/" class="item<% if current %> active<% end %>">
+            <i class="home icon"></i> HTML
+          </a>
+          <a href="/stylesheets" class="item<% if current %> active<% end %>">CSS</a>
+        </nav>
+      </header>
+
+      <%= yield %>
+
+    </div>
+  </body>
+</html>

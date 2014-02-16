@@ -1,0 +1,42 @@
+<section class="the-tool two column stackable ui grid">
+  <form action="/html/generate" method="POST" id="pygmentize-form"
+        class="ui form eight wide column">
+
+    <div class="field">
+      <label for="lexer">Select the language</label>
+      <div class="select-style">
+        <select id="lexer">
+
+        <% @lexer_options.each do |value, text| %>
+          <option class="item" value="<%= value %>"><%= text %></option>
+        <% end %>
+
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="ui slider checkbox">
+        <input type="checkbox" name="linenos" id="linenos" value="1">
+        <label for="linenos">Add line numbers</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="input-text">Enter your code</label>
+      <textarea id="input-text" name="input-text" rows="20"></textarea>
+    </div>
+
+    <button type="button" id="pygmentize-submit"
+            class="ui green submit button">Generate</button>
+  </form>
+
+  <output class="output-field eight wide column">
+    <div style="position: relative;">
+      <div class="ui right red corner label">
+        <div class="text">Code</div>
+      </div>
+      <div id="output-text"></div>
+    </div>
+  </output>
+</section>
