@@ -71,6 +71,12 @@ img {
   word-wrap: break-word;
 }
 
+footer {
+  margin: 30px 0;
+  font-size: .9rem;
+  text-align: center;
+}
+
 @media screen and (max-width: 482px) {
   #ribbon { display: none; }
 }
