@@ -1,5 +1,6 @@
 ruby: Ruby
 js: JavaScript
+coffeescript: CoffeeScript
 php: PHP
 python: Python
 bash: Bash

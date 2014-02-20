@@ -79,6 +79,9 @@ $(document).ready ->
     c:
       mode: "text/x-csrc"
       file: "/js/mode/clike/clike.js"
+    coffeescript:
+      mode: "text/x-coffeescript"
+      file: "/js/mode/coffeescript/coffeescript.js"
     cpp:
       mode: "text/x-c++src"
       file: "/js/mode/clike/clike.js"
