@@ -64,9 +64,6 @@ $(document).ready ->
     python:
       mode: "text/x-python"
       file: "/js/mode/python/python.js"
-    powershell:
-      mdoe: "text/x-powershell"
-      file: "/js/mode/powershell/powershell.js"
     bash:
       mode: "text/x-sh"
       file: "/js/mode/shell/shell.js"

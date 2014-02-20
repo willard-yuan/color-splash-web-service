@@ -2,7 +2,6 @@ ruby: Ruby
 js: JavaScript
 php: PHP
 python: Python
-powershell: PowerShell
 bash: Bash
 css: CSS
 html: HTML
