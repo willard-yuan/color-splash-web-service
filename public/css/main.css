@@ -29,7 +29,7 @@ img {
 }
 
 #container {
-  max-width: 940px;
+  max-width: 1200px;
   padding: 0 20px;
   margin: 0 auto;
 }
@@ -67,7 +67,8 @@ img {
 
 #output-text {
   border: 1px solid #333;
-  min-height: 493px;
+  height: 493px;
+  overflow-y: auto;
   word-wrap: break-word;
 }
 
