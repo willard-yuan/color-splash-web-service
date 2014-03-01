@@ -24,11 +24,7 @@ module Project
     #
     # Returns String
     def generate(code, lexer, linenos)
-      if linenos == "true"
-        pygmented_code = Pygments.highlight(code, lexer: lexer, options: { linenos: true })
-      else
-        pygmented_code = Pygments.highlight(code, lexer: lexer)
-      end
+      pygmented_code = generate_raw code, lexer, linenos
 
       Pygments.highlight(pygmented_code, lexer: 'html')
     end
